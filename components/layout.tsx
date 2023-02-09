@@ -22,7 +22,9 @@ function Layout({ children }: WrapperProps) {
       <BlankDiv height="100px" />
       <main id="content">
         {children}
-        { pathname !== '/'  && <Link href="/"><Button text="回首頁" /></Link> }
+        { pathname !== '/'  && <div style={{ margin: '30px' }}>
+            <Link href="/"><Button text="回首頁" /></Link>
+          </div>}
         <BlankDiv />
       </main>
       <BlankDiv height="100px" />

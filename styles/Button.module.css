@@ -2,14 +2,24 @@
   border: 2px solid #01ff01;
   display: inline-block;
   padding: 10px 25px;
-  margin: 40px;
   border-radius: 3px;
   transition: all .4s;
   color: #01ff01;
   cursor: pointer;
 }
 
+.button.disabled {
+  cursor: not-allowed;
+  color: green;
+  border-color: green;
+}
+
 .button:hover {
   background-color: #01ff01;
   color: #000;
+}
+
+.button.disabled:hover {
+  background-color: transparent;
+  color: green;
 }

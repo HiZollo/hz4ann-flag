@@ -25,7 +25,7 @@ export default function Home() {
       <h1>HiZollo 四週年搶旗活動</h1>
       <textarea id={styles.intro} value={content} readOnly> 
       </textarea>
-      <Button text="開始遊戲" onClick={() => setOpen(true)} /> 
+      <Button text="開始遊戲" style={{ margin: '20px' }} onClick={() => setOpen(true)} /> 
         <PopupWrapper open={open} handleClose={() => setOpen(false)}>
           {Flags.START_UP}
         </PopupWrapper>
