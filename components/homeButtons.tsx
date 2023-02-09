@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from 'react'
+import Link from 'next/link'
 import $ from 'classnames'
 import styles from '@/styles/Home.module.css'
 import { LightsUp } from '@/utils/LightsUp'
@@ -62,11 +63,11 @@ function Button({ row, col, flip }: ButtonProps) {
   const state = game.board[row][col]
 
   return (
-    <a 
+    <Link 
       className={styles.levelButtonLink} 
       href={`/levels/${index < 5 ? index : index + 1}`} 
-      target="_blank"
       onClick={() => flip(row, col)}
+      onContextMenu={() => flip(row, col)}
     >
       <div className={$(styles.levelButton, {
         [styles.light]: state,
@@ -74,7 +75,7 @@ function Button({ row, col, flip }: ButtonProps) {
       })}>
         {index}
       </div>
-    </a>
+    </Link>
   );
 }
 
