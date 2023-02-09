@@ -1,0 +1,27 @@
+.fliptrip {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.fliptripPiece {
+  width: 50px;
+  height: 50px;
+  color: white;
+  border: 3px solid #01ff01;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fliptripPiece:hover {
+  cursor: pointer;
+}
+
+.disabled {
+  border: 3px solid green;
+}
+
+.disabled:hover {
+  cursor: not-allowed;
+}
