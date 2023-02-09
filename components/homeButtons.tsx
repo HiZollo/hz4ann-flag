@@ -1,0 +1,89 @@
+import { createContext, useState, useContext, useEffect } from 'react'
+import $ from 'classnames'
+import Popup from 'reactjs-popup'
+import styles from '@/styles/Home.module.css'
+import { LightsUp } from '@/utils/LightsUp'
+import { PopupWindow } from '@/components/popup'
+
+const Game = createContext(new LightsUp());
+
+function HomeButtons() {
+  const [game, setGame] = useState(new LightsUp())
+  const [open, setOpen] = useState(false)
+  const [opened, setOpened] = useState(false)
+  const [, refresh] = useState(true)
+
+  const flip = (x: number, y: number) => {
+    game.flip(x, y)
+    refresh(v => !v)
+  }
+
+  useEffect(() => {
+    if (!opened && game.win) {
+      setOpen(true)
+      setOpened(true)
+    }
+  })
+
+  return (
+    <>
+      <h2>關卡</h2>
+      <Game.Provider value={game}>
+        <div id={styles.buttons}>
+          {
+            game.board.map((rows, rowNum) => {
+              return rows.map((value, colNum) => {
+                return <Button 
+                  key={rowNum*5+colNum} 
+                  row={rowNum} 
+                  col={colNum} 
+                  flip={flip}
+                /> 
+              })
+            })
+          }
+        </div>
+      </Game.Provider>
+      <Popup
+        open={open}
+        onClose={() => setOpen(false)}
+        modal 
+        closeOnDocumentClick
+      >
+        <PopupWindow close={() => setOpen(false)}>
+          {`hz4ann_flag_{lightsup}`}
+        </PopupWindow>
+      </Popup>
+    </>
+  )  
+}
+interface ButtonProps {
+  row: number
+  col: number
+  flip: (x: number, y: number) => void
+}
+
+function Button({ row, col, flip }: ButtonProps) {
+  const index = row*5 + col + 1
+  const game = useContext(Game)
+
+  const state = game.board[row][col]
+
+  return (
+    <a 
+      className={styles.levelButtonLink} 
+      href={`/levels/${index < 5 ? index : index + 1}`} 
+      target="_blank"
+      onClick={() => flip(row, col)}
+    >
+      <div className={$(styles.levelButton, {
+        [styles.light]: state,
+        [styles.dark]: !state
+      })}>
+        {index}
+      </div>
+    </a>
+  );
+}
+
+export { HomeButtons }

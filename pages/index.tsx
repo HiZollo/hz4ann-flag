@@ -5,6 +5,7 @@ import Popup from 'reactjs-popup'
 import styles from '@/styles/Home.module.css'
 import { Button } from '@/components/button'
 import { PopupWindow } from '@/components/popup'
+import { HomeButtons } from '@/components/homeButtons'
 
 const wait = (ms: number) => new Promise(res => setTimeout(res, ms))
 
@@ -34,6 +35,7 @@ export default function Home() {
          {`hz4ann_flag_{81c715dd}`}
        </PopupWindow>
       </Popup>
+      <HomeButtons />
     </>
   )
 }
