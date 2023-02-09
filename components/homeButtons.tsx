@@ -5,6 +5,8 @@ import styles from '@/styles/Home.module.css'
 import { LightsUp } from '@/utils/LightsUp'
 import { PopupWrapper } from '@/components/popup'
 
+import Flags from '@/data/flags.json'
+
 const Game = createContext(new LightsUp());
 
 function HomeButtons() {
@@ -45,7 +47,7 @@ function HomeButtons() {
         </div>
       </Game.Provider>
       <PopupWrapper open={open} handleClose={() => setOpen(false)}>
-        {`hz4ann_flag_{lightsup}`}
+        {Flags.LIGHTS_UP}
       </PopupWrapper>
     </>
   )  

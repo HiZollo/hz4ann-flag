@@ -6,6 +6,8 @@ import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
 import { HomeButtons } from '@/components/homeButtons'
 
+import Flags from '@/data/flags.json'
+
 const wait = (ms: number) => new Promise(res => setTimeout(res, ms))
 
 export default function Home() {
@@ -25,7 +27,7 @@ export default function Home() {
       </textarea>
       <Button text="開始遊戲" onClick={() => setOpen(true)} /> 
         <PopupWrapper open={open} handleClose={() => setOpen(false)}>
-          {`hz4ann_flag_{81c715dd}`}
+          {Flags.START_UP}
         </PopupWrapper>
       <HomeButtons />
     </>
