@@ -1,9 +1,23 @@
+@keyframes popupEnterAnimation {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
 .popupWindow {
   width: 400px;
   padding: 0px;
-  background-color: #222;
-  color: #01cc01;
+  box-shadow: 0 0 10px #555;
+  background-color: #111;
+  color: #01ff01;
   border: 1px #01ff01 solid;
+
+  animation-name: popupEnterAnimation;
+  animation-duration: 350ms;
 }
 
 .popupTitle {
@@ -22,8 +36,8 @@
   flex-grow: 0;
   border: none;
   outline: none;
-  background-color: transparent;
-  color: #01ff01; 
+  background-color: #01ff01;
+  color: black; 
   font-size: 30px;
   text-align: center;
   margin: 0;
@@ -32,7 +46,8 @@
 }
 
 .popupCloseButton:hover {
-  color: #88ff88;
+  background-color: #41ff41;
+  color: #333;
 }
 
 .popupContent {
