@@ -18,6 +18,7 @@
 
   animation-name: popupEnterAnimation;
   animation-duration: 350ms;
+  animation-timing-function: cubic-bezier(.09, .91, .61, .95);
 }
 
 .popupTitle {
