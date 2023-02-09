@@ -1,9 +1,8 @@
 import { createContext, useState, useContext, useEffect } from 'react'
 import $ from 'classnames'
-import Popup from 'reactjs-popup'
 import styles from '@/styles/Home.module.css'
 import { LightsUp } from '@/utils/LightsUp'
-import { PopupWindow } from '@/components/popup'
+import { PopupWrapper } from '@/components/popup'
 
 const Game = createContext(new LightsUp());
 
@@ -44,16 +43,9 @@ function HomeButtons() {
           }
         </div>
       </Game.Provider>
-      <Popup
-        open={open}
-        onClose={() => setOpen(false)}
-        modal 
-        closeOnDocumentClick
-      >
-        <PopupWindow close={() => setOpen(false)}>
-          {`hz4ann_flag_{lightsup}`}
-        </PopupWindow>
-      </Popup>
+      <PopupWrapper open={open} handleClose={() => setOpen(false)}>
+        {`hz4ann_flag_{lightsup}`}
+      </PopupWrapper>
     </>
   )  
 }

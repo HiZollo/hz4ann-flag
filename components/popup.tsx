@@ -1,4 +1,5 @@
 import React from 'react'
+import Popup from 'reactjs-popup'
 import styles from '@/styles/Popup.module.css'
 
 interface PopupWindowProps {
@@ -32,4 +33,25 @@ function CloseButton({ close }: CloseButtonProps) {
   )
 }
 
-export { PopupWindow }
+interface PopupWrapperProps {
+  open: boolean
+  handleClose: () => void
+  children: React.ReactNode
+}
+
+function PopupWrapper({ open, handleClose, children }: PopupWrapperProps) {
+  return (
+    <Popup 
+      open={open}
+      onClose={handleClose}
+      modal 
+      closeOnDocumentClick
+    > 
+      <PopupWindow close={handleClose}>
+        {children}
+      </PopupWindow>
+    </Popup>
+  )
+}
+
+export { PopupWindow, PopupWrapper }

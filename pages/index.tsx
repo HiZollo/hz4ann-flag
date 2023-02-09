@@ -1,10 +1,9 @@
 import type { Dispatch, SetStateAction } from 'react'
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
-import Popup from 'reactjs-popup'
 import styles from '@/styles/Home.module.css'
 import { Button } from '@/components/button'
-import { PopupWindow } from '@/components/popup'
+import { PopupWrapper } from '@/components/popup'
 import { HomeButtons } from '@/components/homeButtons'
 
 const wait = (ms: number) => new Promise(res => setTimeout(res, ms))
@@ -25,16 +24,9 @@ export default function Home() {
       <textarea id={styles.intro} value={content} readOnly> 
       </textarea>
       <Button text="開始遊戲" onClick={() => setOpen(true)} /> 
-      <Popup 
-        open={open}
-        onClose={() => setOpen(false)}
-        modal 
-        closeOnDocumentClick
-      > 
-       <PopupWindow close={() => setOpen(false)}>
-         {`hz4ann_flag_{81c715dd}`}
-       </PopupWindow>
-      </Popup>
+        <PopupWrapper open={open} handleClose={() => setOpen(false)}>
+          {`hz4ann_flag_{81c715dd}`}
+        </PopupWrapper>
       <HomeButtons />
     </>
   )
