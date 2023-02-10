@@ -71,12 +71,12 @@ function Button({ row, col, flip }: ButtonProps) {
       onClick={() => flip(row, col)}
       onContextMenu={() => flip(row, col)}
     >
-      <div className={$(styles.levelButton, {
+      <button className={$(styles.levelButton, {
         [styles.light]: state,
         [styles.dark]: !state
       })}>
         {index}
-      </div>
+      </button>
     </Link>
   );
 }

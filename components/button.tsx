@@ -7,12 +7,21 @@ interface ButtonProps {
   [key: string]: any
 }
 function Button({ text, disabled = false, ...props }: ButtonProps) {
+  if (disabled) {
+    return (
+      <div className={$(
+        styles.button, 
+        styles.disabled
+      )} {...props}>
+        {text}
+      </div>
+    )
+  }
+
   return (
-    <div className={`${$(styles.button, {
-      [styles.disabled]: disabled
-    })}`} {...props}>
+    <button className={styles.button} {...props}>
       {text}
-    </div>
+    </button>
   )
 }
 

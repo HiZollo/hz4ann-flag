@@ -1,4 +1,5 @@
 .button {
+  all: unset;
   border: 2px solid #01ff01;
   display: inline-block;
   padding: 10px 25px;
@@ -14,12 +15,11 @@
   border-color: green;
 }
 
-.button:hover {
+.button:not(.disabled):hover {
   background-color: #01ff01;
   color: #000;
 }
 
-.button.disabled:hover {
-  background-color: transparent;
-  color: green;
+.button:not(.disabled):focus {
+  box-shadow: 0px 0px 10px #01ff01;
 }
