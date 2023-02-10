@@ -1,11 +1,10 @@
-#intro {
+.intro {
   background-color: #000;
   padding: 15px;
   color: #01ff01;
   resize: none;
   font-size: 16px;
   width: calc(100% - 30px);
-  height: 450px;
 }
 
 #buttons {
