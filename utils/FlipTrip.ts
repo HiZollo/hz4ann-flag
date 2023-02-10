@@ -1,7 +1,7 @@
 class FlipTrip {
   public colors: number;
   public size: number;
-  public state: number[];
+  public states: number[];
   public endStatus?: string;
 
   private perms: number[];
@@ -17,7 +17,7 @@ class FlipTrip {
 
     this.colors = colors;
     this.size = size;
-    this.state = Array.from({ length: size }, () => 0);
+    this.states = Array.from({ length: size }, () => 0);
 
     this.perms = [size];
     this.permMaxSize = (size + 1) * (size + 2) / 2;
@@ -28,8 +28,8 @@ class FlipTrip {
       throw new Error('Attempting to flip at an invalid position.');
     }
 
-    this.state[position] = (this.state[position] + 1) % this.colors;
-    const perm = this.state.reduce((acc, cur) => acc + (10 ** cur), 0);
+    this.states[position] = (this.states[position] + 1) % this.colors;
+    const perm = this.states.reduce((acc, cur) => acc + (10 ** cur), 0);
 
     if (this.perms.includes(perm)) {
       this.endStatus = 'Lose';
