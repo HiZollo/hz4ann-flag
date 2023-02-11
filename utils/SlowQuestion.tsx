@@ -26,8 +26,6 @@ class SlowQuestion {
   public getQuestionComponent(index: number): React.FC {
     const thisQuestion = this.questions[index]
 
-    if (!thisQuestion) throw new Error('INVALID_INDEX')
-
     const self = this
 
     return function() {
@@ -66,13 +64,15 @@ class SlowQuestion {
     const thisQuestion = this.questions[index]
 
     const self = this
-    if(!thisQuestion) throw new Error('INVALID_INDEX')
 
     if (thisQuestion.mode === "CHOOSE") return function({
       handleCorrect, handleWrong
     }: AnswerComponentProps) {
-      const [disable, setDisable] = useState(false)
+      const [disabled, setDisabled] = useState(false)
       const [show, setShow] = useState(false)
+      const [wrong, setWrong] = useState(false)
+      const [correct, setCorrect] = useState(false)
+
       useEffect(() => {
         self.afterType = () => setShow(true)
         return () => {
@@ -80,14 +80,22 @@ class SlowQuestion {
         }
       }, [])
 
+      useEffect(() => {
+        if (wrong) {
+          handleWrong()
+          setDisabled(true)
+        }
+      }, [wrong])
+
+      useEffect(() => {
+        if (correct) {
+          handleCorrect()
+        }
+      }, [correct])
+
       const selectButtons = thisQuestion.choice
         .map((value, index) => {
-          const getWrongAnswer = () => {
-            handleWrong()
-            setDisable(true)
-          }
-
-          return disable ?
+          return disabled ?
             <Button 
               disabled={true} 
               text={`${index + 1}`}
@@ -95,8 +103,8 @@ class SlowQuestion {
             />:
             <Button 
               onClick={index === thisQuestion.answer ?
-                handleCorrect : getWrongAnswer}
-              disabled={disable}
+                () => setCorrect(true) : () => setWrong(true)}
+              disabled={disabled}
               text={`${index + 1}`} 
               key={value} 
             />
@@ -211,7 +219,7 @@ function SlowQuestionComponent({
   handleCorrect, handleWrong, Win, handleWin
 }: SlowQuestionComponentProps) {
   const [index, setIndex] = useState(0)
-  const [textFin, setTextFin] = useState(false)
+  const [win, setWin] = useState(false)
 
   const QuestionManager = new SlowQuestion(questions)
 
@@ -226,7 +234,6 @@ function SlowQuestionComponent({
   const getCorrect = () => {
     handleCorrect?.()
     setIndex(v => v + 1)
-    setTextFin(false)
   }
 
   const getWrong = () => {
