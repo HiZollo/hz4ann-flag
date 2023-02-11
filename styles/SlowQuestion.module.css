@@ -1,0 +1,24 @@
+.questionContext {
+  composes: intro from './Home.module.css';
+}
+
+.chooseButtonRow {
+  display: flex;
+  flex-direction: row;
+  margin: 30px auto;
+  gap: 20px;
+}
+
+.inputAnswerArea {
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto;
+  gap: 20px;
+}
+
+.inputAnswerArea .buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
