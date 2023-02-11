@@ -1,4 +1,6 @@
 .input {
+  all: unset;
+  border: 1px solid #01ff01;
   height: 22px;
   font-size: 22px;
   padding: 10px 15px;
@@ -9,5 +11,6 @@
 }
 
 .input.disabled {
+  border: 1px solid #008800;
   color: #008800;
 }
