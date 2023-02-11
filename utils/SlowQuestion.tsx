@@ -38,10 +38,10 @@ class SlowQuestion {
         switch (thisQuestion.mode) {
           case "CHOOSE":
             const choices = thisQuestion.choice.map((text, index) => `(${index + 1}) ${text}`)
-             self.type([thisQuestion.text, ...choices], setContent)
+             self.type([`${index + 1}. ${thisQuestion.text}`, ...choices], setContent)
           break;
           case "INPUT":
-            self.type([thisQuestion.text], setContent)
+            self.type([`${index + 1}. ${thisQuestion.text}`], setContent)
         }            
         return () => setContent('_')
       }, [])
