@@ -1,0 +1,13 @@
+.input {
+  height: 22px;
+  font-size: 22px;
+  padding: 10px 15px;
+  width: 300px;
+  background-color: #000;
+  color: #01ff01;
+  text-align: center;
+}
+
+.input.disabled {
+  color: #008800;
+}
