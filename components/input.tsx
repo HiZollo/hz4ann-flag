@@ -3,7 +3,7 @@ import styles from '@/styles/Input.module.css'
 
 interface InputProps {
   value: string
-  disabled: boolean
+  disabled?: boolean
   [key: string]: any
 }
 
@@ -14,7 +14,7 @@ function Input({ value, disabled, ...props }: InputProps) {
       [styles.disabled]: disabled
     })}
     value={value}
-    disabled={disabled} 
+    disabled={disabled ?? false} 
     {...props}
   />
 }
