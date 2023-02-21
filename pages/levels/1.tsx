@@ -14,7 +14,7 @@ const letter =
      This is a super secret letter, so I encrypted it with my special method. If thou art reading this, that probably meanth thou hast already decoded the content.
      Anyway, the reason why this letter is top secret is that it is going to tell thee the secret password of a flag. Once thou getest the password, go to the event website and enter it.
      This information is very sensitive, please keep it private.
-     The password of the flag hath been showned, but it is unfortunately not on this letter due to security issue. Try get the password by thyself. Password is hiding, but in the place thou canst see it.
+     The password of the flag hath been shown, but it is unfortunately not on this letter due to security issue. Try get the password by thyself. Password is hiding, but in the place thou canst see it.
 
 Sincerely,
 AC`
