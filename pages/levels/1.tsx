@@ -43,7 +43,6 @@ export default function () {
     setValue(e.target.value)
   }
 
-
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') submit()
   }
@@ -52,7 +51,7 @@ export default function () {
     if (wrongTime >= WRONG_LIMIT) return
     if (value === answer) {
       setCorrect(true)
-      setWrongTime(3)
+      setWrongTime(WRONG_LIMIT)
       return
     }
     setWrong(true)
