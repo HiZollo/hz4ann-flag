@@ -6,10 +6,9 @@ import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
 import { HomeButtons } from '@/components/homeButtons'
 import { useAutosizeTextArea } from '@/utils/useAutosizeTextArea'
+import { wait } from '@/utils/wait'
 
 import Flags from '@/data/flags.json'
-
-const wait = (ms: number) => new Promise(res => setTimeout(res, ms))
 
 export default function Home() {
   const [content, setContent] = useState('_')

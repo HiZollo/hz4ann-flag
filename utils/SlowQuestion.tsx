@@ -2,10 +2,8 @@ import { Dispatch, SetStateAction, useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import { useAutosizeTextArea } from '@/utils/useAutosizeTextArea'
+import { wait } from '@/utils/wait'
 import styles from '@/styles/SlowQuestion.module.css'
-
-const wait = (ms: number) => new Promise(res => setTimeout(res, ms))
-
 
 type QuestionType =
   | { text: string, mode: "CHOOSE", choice: string[], answer: number }
