@@ -14,3 +14,7 @@
   border: 1px solid #008800;
   color: #008800;
 }
+
+.input::placeholder {
+  color: #005500;
+}

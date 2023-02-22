@@ -11,10 +11,10 @@ import Flags from '@/data/flags.json'
 
 const letter = 
 `To Zollo:
-     This is a super secret letter, so I encrypted it with my special method. If thou art reading this, that probably meanth thou hast already decoded the content.
-     Anyway, the reason why this letter is top secret is that it is going to tell thee the secret password of a flag. Once thou getest the password, go to the event website and enter it.
-     This information is very sensitive, please keep it private.
-     The password of the flag hath been shown, but it is unfortunately not on this letter due to security issue. Try get the password by thyself. Password is hiding, but in the place thou canst see it.
+     This is a super secret letter, so I encrypted it with my special method. Be thou reading this, thou probably hast already decoded the content. Thou art doing a good job.
+     Anyway, this letter is top secret since it is going to tell thee the secret password of a flag. Once thou getest the password, go to the event website and enter it.
+     This is a very sensitive information, please keep it private.
+     The password of the flag hath been shown, but it is unfortunately not on this letter due to security issue. Try get the password by thyself. Password is hidden, but in the place thou canst see it.
 
 Sincerely,
 AC`
@@ -75,14 +75,14 @@ export default function () {
         gap: '20px',
         margin: '10px'
       }}>
-        <Input value={value} onKeyDown={handleKeyDown} onChange={handleChange} disabled={wrongTime >= WRONG_LIMIT} />
+        <Input value={value} placeholder="請輸入密碼" onKeyDown={handleKeyDown} onChange={handleChange} disabled={wrongTime >= WRONG_LIMIT} />
         <Button text="確認" onClick={submit} disabled={wrongTime >= WRONG_LIMIT}/>
       </div>
       <PopupWrapper open={correct} handleClose={() => setCorrect(false)}>
         {Flags.LEVEL1_CAESAR}
       </PopupWrapper>
       <PopupWrapper open={wrong} handleClose={() => setWrong(false)}>
-        密碼錯誤
+        密碼錯誤 ({wrongTime}/{WRONG_LIMIT})
       </PopupWrapper>
     </>
   )
