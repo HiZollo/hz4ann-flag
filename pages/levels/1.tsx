@@ -10,13 +10,12 @@ import styles from '@/styles/Home.module.css'
 import Flags from '@/data/flags.json'
 
 const letter = 
-`To Zollo:
-     This is a super secret letter, so I encrypted it with my special method. Be thou reading this, thou probably hast already decoded the content. Thou art doing a good job.
-     Anyway, this letter is top secret since it is going to tell thee the secret password of a flag. Once thou getest the password, go to the event website and enter it.
-     This is a very sensitive information, please keep it private.
-     The password of the flag hath been shown, but it is unfortunately not on this letter due to security issue. Try get the password by thyself. Password is hidden, but in the place thou canst see it.
-
-Sincerely,
+`Hail Zollo,
+I pen this missive with the utmost care, bearing secrets that are meant only for thine ears. Verily, this letter is guarded by my own hand, and its contents shrouded in a veil of secrecy, which only thy astuteness can decrypt.
+In disclosure, I bestowed upon thee the key to the password that unlocks a banner of great esteem. When thou hast secured this key, I implore thee to visit the portal with great haste and unlock the gateway that guards the knowledge of highest import. Let it be known that it is for thine eyes only; therefore, I beseech thee, to guard it with the utmost care and discretion.
+Though I may not disclose the password in this correspondence, let it be known that it exists in plain sight, waiting to be deciphered with all thy astuteness. May thy diligence and vigilance be heightened, my friend, for the answer lies before thy vision.
+In closing, stay assured that I trust thee with this knowledge and hold no reservations about thy ability to decipher the secrets within the confines of this epistle. May fortune smile upon thee in thy quest for this password, and may it bring thee good tidings.
+Ever your devoted servant,
 AC`
 
 export default function () {
