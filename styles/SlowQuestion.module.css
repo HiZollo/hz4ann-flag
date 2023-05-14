@@ -1,5 +1,5 @@
 .questionContext {
-  composes: intro from './Home.module.css';
+  composes: typing-textarea from '../components/typingTextArea.module.css'
 }
 
 .chooseButtonRow {

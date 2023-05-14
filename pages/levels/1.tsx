@@ -1,11 +1,8 @@
-import type { Dispatch, SetStateAction } from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { Input } from '@/components/input'
 import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
-import { useAutosizeTextArea } from '@/utils/useAutosizeTextArea'
-import { wait } from '@/utils/wait'
-import styles from '@/styles/Home.module.css'
+import { TypingTextArea } from '@/components/typingTextArea'
 
 import Flags from '@/data/flags.json'
 
@@ -19,25 +16,15 @@ Ever your devoted servant,
 AC`
 
 export default function () {
-  const [content, setContent] = useState('_')
   const [correct, setCorrect] = useState(false)
   const [wrong, setWrong] = useState(false)
   const [value, setValue] = useState('')
   const [wrongTime, setWrongTime] = useState(0)
   const WRONG_LIMIT = 3
-  const textareaRef = useRef(null)
   const { current: offset } = useRef(~~(Math.random() * 25) + 1)
   const { current: text } = useRef(Caesar(letter, offset))
   const answer = Caesar("Caesar", 26-offset)
 
-  useAutosizeTextArea(textareaRef.current, content)
-
-  useEffect(() => {
-    type(text.split('\n'), setContent)
-
-    return () => setContent('_')
-  }, [])
-  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
   }
@@ -60,13 +47,8 @@ export default function () {
   return (
     <>
       <h1>Caesar</h1>
-      <textarea 
-        ref={textareaRef}
-        className={styles.intro}
-        value={content}
-        tabIndex={-1}
-        rows={1}
-        readOnly
+      <TypingTextArea
+        text={text.split('\n')}
       />
       <div style={{ 
         display: 'flex', 
@@ -102,24 +84,4 @@ function Caesar(text: string, offset: number) {
       dest <= 90 ? dest : dest % 90 + 64
     )
   })
-}
-
-async function type(text: string[], appendContent: Dispatch<SetStateAction<string>>) {
-  let acc = ''
-  for (const sentence of text) {
-    for (const ch of sentence) {
-      acc += ch
-      appendContent(acc + '_') 
-      await wait(20)
-    }
-
-    await wait(100)
-    acc += '\n'
-    appendContent(acc + '_')
-    await wait(10)
-    acc += '\n'
-    appendContent(acc + '_')
-    await wait(1500)
-  }
-  acc = ''
 }
