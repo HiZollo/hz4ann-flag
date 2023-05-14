@@ -1,0 +1,13 @@
+.geo-image {
+  margin: 70px 10px 15px 10px;
+  border: 2px solid #0F0;
+  border-radius: 3px;
+}
+
+.geo-input {
+  margin: 5px 0;
+}
+
+.geo-button {
+  margin-top: 40px;
+}

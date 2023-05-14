@@ -13,6 +13,7 @@
 .input.disabled {
   border: 1px solid #008800;
   color: #008800;
+  cursor: not-allowed;
 }
 
 .input::placeholder {
