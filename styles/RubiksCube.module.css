@@ -1,0 +1,41 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  border: 2px solid #0F0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-corner {
+  border-color: transparent;
+}
+
+.grid-control-disabled {
+  color: #080;
+  border: 2px solid #080;
+}
+
+.grid-control:hover {
+  cursor: pointer;
+  background-color: #030;
+  transition-duration: 200ms;
+}
+
+.grid-control-disabled:hover {
+  cursor: not-allowed;
+  background-color: #030;
+  transition-duration: 200ms;
+}
