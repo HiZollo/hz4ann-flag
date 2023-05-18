@@ -61,7 +61,7 @@ export default function() {
         })}
       </div>
       <PopupWrapper open={open} handleClose={() => setOpen(false)}>
-        {Flags.LEVEL3_INTERVAL}
+        {Flags.LEVEL4_INTERVAL}
       </PopupWrapper>
     </>
   )
