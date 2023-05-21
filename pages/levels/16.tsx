@@ -11,11 +11,12 @@ const RADIUS = 30;
 let ff: (p: Coords) => void;
 
 export default function() {
-  const canvasRef = useRef(<canvas></canvas>);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [adjustSpeed, setAdjustSpeed] = useState<((p: Coords) => void)>();
 
   useEffect(() => {
-    const canvas = canvasRef.current as HTMLCanvasElement;
+    const canvas = canvasRef.current;
+    if (!canvas) return
     const context = canvas.getContext('2d');
     if (!context) return;
 
