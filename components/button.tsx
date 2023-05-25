@@ -5,10 +5,9 @@ interface ButtonProps {
   text: string
   disabled?: boolean
   className?: string
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
   [key: string]: any
 }
-function Button({ text, disabled = false, className, onClick, ...props }: ButtonProps) {
+function Button({ text, disabled = false, className, ...props }: ButtonProps) {
   if (disabled) {
     return (
       <div 
@@ -17,7 +16,6 @@ function Button({ text, disabled = false, className, onClick, ...props }: Button
           className, 
           styles.disabled
         )}
-        onClick={() => {}}
         {...props}
       >
         {text}
@@ -26,7 +24,7 @@ function Button({ text, disabled = false, className, onClick, ...props }: Button
   }
 
   return (
-    <button className={styles.button + ' ' + className} onClick={onClick} {...props}>
+    <button className={styles.button + ' ' + className} {...props}>
       {text}
     </button>
   )

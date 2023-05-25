@@ -58,6 +58,8 @@ export default function() {
   }, ['', '', '', '', '', ''])
 
   function handleClick() {
+    if (disabled) return
+
     if (validate(data)) {
       setCorrect(true)
     }
