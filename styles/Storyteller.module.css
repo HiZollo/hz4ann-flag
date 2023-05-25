@@ -1,0 +1,13 @@
+.q2Inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.q2Inputs > input {
+  width: 350px;
+}
+
+.submit {
+  margin: 20px;
+}
