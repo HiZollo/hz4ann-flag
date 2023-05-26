@@ -30,13 +30,13 @@ const LatinOrdinalNumbersFeminineGenitiveSingle = [
 
 const answer = {
   q1: 3,
-  q2: ["Zollus", "Iulius", "Octavia"],
+  q2: ["Iulius", "Zollus", "Octavia"],
   q3: 4,
   q4: ["medicamentum", "carta nominis", "calamus", "culter"],
   q5: "Zollus",
   q6: "Octavia",
   q7: "Et tu, Octavia."
-}
+} as const
 
 interface AnswerType {
   q1: number
