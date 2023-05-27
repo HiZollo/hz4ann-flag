@@ -1,9 +1,8 @@
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { PopupWrapper } from '@/components/popup';
-import 'katex/dist/katex.min.css';
 import { useState } from 'react';
-import Latex from 'react-latex-next';
+import { MathJax, MathJaxProvider } from '@cutting/use-mathjax';
 
 import Flags from '@/data/flags.json';
 import styles from '@/styles/Formula.module.css';
@@ -37,12 +36,12 @@ export default function() {
   }
 
   return (
-    <>
+    <MathJaxProvider>
       <h1>請算</h1>
       <p>有個神奇的公式長這樣：</p>
-      <Latex>{"$$ p_n = \\sum_{i=1}^{2^n} \\left\\lfloor \\left( \\frac{n}{\\sum_{j=1}^{i}\\left\\lfloor \\left( \\cos \\frac{(j-1)!+1}{j}\\pi \\right)^2 \\right\\rfloor} \\right)^{1/n} \\right\\rfloor $$"}</Latex>
+      <MathJax>{"$$ p_n = \\sum_{i=1}^{2^n} \\left\\lfloor \\left( \\frac{n}{\\sum_{j=1}^{i}\\left\\lfloor \\left( \\cos \\frac{(j-1)!+1}{j}\\pi \\right)^2 \\right\\rfloor} \\right)^{1/n} \\right\\rfloor $$"}</MathJax>
 
-      <Latex>{"請問 $ p_{10} $ 是多少呢？"}</Latex>
+      <MathJax>{"請問 $ p_{10} $ 是多少呢？"}</MathJax>
       <Input className={styles['formula-input']} disabled={disabled} value={answer} onChange={handleChange} onKeyDown={handleKeyDown}/>
       <Button disabled={!answer.length || disabled} className={styles['formula-button']} text="提交" onClick={handleClick} />
 
@@ -52,6 +51,6 @@ export default function() {
       <PopupWrapper open={wrong} handleClose={() => setWrong(false)}>
         答案並不是 {answer}
       </PopupWrapper>
-    </>
+    </MathJaxProvider>
   )
 }

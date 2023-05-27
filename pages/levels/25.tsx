@@ -1,9 +1,8 @@
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { PopupWrapper } from '@/components/popup';
-import 'katex/dist/katex.min.css';
 import { useReducer, useState } from 'react';
-import Latex from 'react-latex-next';
+import { MathJax, MathJaxProvider } from '@cutting/use-mathjax'
 
 import Flags from '@/data/flags.json';
 import styles from '@/styles/Formula.module.css';
@@ -36,24 +35,24 @@ export default function() {
   }
 
   return (
-    <>
+    <MathJaxProvider>
       <h1>盲盒</h1>
 
-      <Latex>{"$ x = $"}</Latex>
+      <MathJax>{"$ x = $"}</MathJax>
       <Input className={styles['formula-input']} value={data[0].input} onChange={(e: Event) => handleChange(e, 0)} />
-      <Latex>{"$ f_1(x) = ax^2 + bx + c = $"}</Latex>
+      <MathJax>{"$ f_1(x) = ax^2 + bx + c = $"}</MathJax>
       <Input className={styles['formula-input']} value={formatOutput(data[0].output)} disabled />
 
-      <Latex>{"$ x = $"}</Latex>
+      <MathJax>{"$ x = $"}</MathJax>
       <Input className={styles['formula-input']} value={data[1].input} onChange={(e: Event) => handleChange(e, 1)} />
-      <Latex>{"$ f_2(x) = ae^{bx^k} = $"}</Latex>
+      <MathJax>{"$ f_2(x) = ae^{bx^k} = $"}</MathJax>
       <Input className={styles['formula-input']} value={formatOutput(data[1].output)} disabled />
 
-      <Latex>{"$ x = $"}</Latex>
+      <MathJax>{"$ x = $"}</MathJax>
       <Input className={styles['formula-input']} value={data[2].input} onChange={(e: Event) => handleChange(e, 2)} />
-      <Latex>{"$ f_3(x) = af_3(x-1) + bf_3(x-2),\\ f_3(0) = 1, \\ f_3(1) = 1 $"}</Latex>
+      <MathJax>{"$ f_3(x) = af_3(x-1) + bf_3(x-2),\\ f_3(0) = 1, \\ f_3(1) = 1 $"}</MathJax>
       <Input className={styles['formula-input']} value={formatOutput(data[2].output)} disabled />
-    </>
+    </MathJaxProvider>
   )
 }
 
