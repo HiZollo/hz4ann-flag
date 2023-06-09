@@ -1,0 +1,22 @@
+.finished {}
+
+.now {
+  color: white;
+}
+
+.unfinished {
+  color: #138D00;
+}
+
+#wordList {
+  font-size: 20px;
+  width: 650px;
+  border: 1px solid green;
+  margin: 30px;
+  padding: 20px;
+  line-height: 35px;
+}
+
+#typingArea {
+  margin: 30px;
+}
