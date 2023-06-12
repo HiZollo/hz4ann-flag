@@ -26,8 +26,8 @@ export default function () {
     setStartTime(Date.now())
   }, [])
 
-  const handleChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    setInput(e.currentTarget.value)
+  const handleChange = ({ currentTarget }: React.KeyboardEvent<HTMLInputElement>) => {
+    setInput(currentTarget.value.trim())
   }
 
   const handleKeyDown = ({ keyCode, key }: React.KeyboardEvent<HTMLInputElement>) => {
@@ -91,7 +91,14 @@ export default function () {
         </span>)
       }
       </div>
-      <Input id={styles.typingArea} value={input} onChange={handleChange} onKeyDown={handleKeyDown} disabled={disabled || end} />
+      <Input 
+        id={styles.typingArea} 
+        value={input} 
+        onChange={handleChange} 
+        onKeyDown={handleKeyDown} 
+        disabled={disabled || end}
+        placeholder={words[currWordIndex]}
+      />
       <Button text={ win ? "獲取 Flag" : "完成打字測驗以獲得 Flag" } disabled={!win || end} onClick={handleWinButtonClick} />
       <PopupWrapper open={open} handleClose={() => setOpen(false)}>
         {endTime - startTime > 60e3 ?

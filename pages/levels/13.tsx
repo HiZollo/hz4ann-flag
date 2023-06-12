@@ -261,3 +261,38 @@ const article = [
   `Octavia Zollum pugione praeparato vulneravit.`,
   `"Et tu, Octavia?" tum cecidit Zollus.`,
 ]
+
+/**
+  Iulius et Zollus in officio sedere. Eos fruuntur mane primo. 
+  Tum, telephonum Zolli sonuit et ille respondit.
+  "Salve?" interrogavit.
+  "Zolle, haec Octavia est," vox familiaris ex alio latere dixit. 
+  Octavia erat amica intima Zolli.
+  "Octavia, gaudeo te audire," Zollus cum solacio dixit.
+  "Zolle, opus tuum habeo," Octavia urgenter dixit. "Homicidium factum est, nescio quid facere."
+  Zollus cum Iulio facile signum sciscitavit, "Absoluter, Octavia. Omnia a nobis fieri possunt. Ubi est locus sceleris?"
+  Octavia eum locum dedit, deinde telefonum clausum est. 
+  Zollus statim ad Iulium conversus est. "Ad locum sceleris ire debemus. Aptus es, Iuli?"
+  "Certe," Iulius respondit et adfuit, iamdudum pallium suum apprehendens.
+  Cum Iulius abiret, Zollus spectabat, deinde suo pallio sibi indutus ipse exibat.  
+  Is ad locum, quem Octavia ei indicavit, perrexit. Interea, Octavia exspectatione eorum anxiebat. 
+  Cum tandem ad locum pervenissent, Octavia eis opportune occurrit.
+
+  Steterunt Octavia et Zollus ad locum sceleris, sermone involuti, dum Iulius indicia quaerebat. 
+  "Oportet nobis scire quis hoc fecerit," dixit Zollus ad Octaviam. "Ne eum impune haec re elapsum patiamur." 
+  Octavia Iulium venire vidit.
+  "Vedio adiutorem meum. Is venit," dixit Zollus. Iulius advenit.
+  "Aliquidne repperis?", inquit Zollus ad Iulium.
+  "Corpus viri huius investigabam, et haec inveni," respondit Iulius.
+  "Videam," dixit Zollus. "Medicamentum, carta nominis, calamusque...quid hoc est?"
+  "Culter est, Zolle. Culter," respondit Iulius.
+  "Sed poterat celari ubi?", Zollus curiosus rogat.
+  "Possum eum celare hic!"
+
+  Iulius Zollum ferit cultro. 
+  Zollus impetum evitavit et manum Iulii tenuit. "Quid agis, Iuli?", rogavit Zollus. 
+  Interea, dolorem a tergo suo sensit. 
+  Octavia Zollum pugione praeparato vulneravit.
+  "Et tu, Octavia?" tum cecidit Zollus.
+
+**/
