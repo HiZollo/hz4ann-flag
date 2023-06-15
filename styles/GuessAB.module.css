@@ -22,6 +22,8 @@
   position: relative;
   display: inline-block;
   cursor: help;
+  color: #0c0;
+  text-decoration: underline dotted;
 }
 
 .tooltip span::before {
