@@ -1,0 +1,63 @@
+#buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 30px;
+  text-align: center;
+}
+
+#submit {
+  grid-column: 1 / span 3;
+}
+
+#attemptCountDisplay {
+  margin-bottom: 20px;
+}
+
+.tooltip {
+  display: inline-block;
+}
+
+.tooltip span {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+}
+
+.tooltip span::before {
+  content: attr(data-tooltip);
+  font-size: 20px;
+  font-weight: normal;
+  background: #000;
+  color: #0a0;
+  border: #0a0 1px solid;
+  padding: 10px;
+  position: absolute;
+  left: -130%;
+  top: -300%;
+  white-space: pre;
+}
+
+.tooltip span::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: 50%;
+  width: 0;
+  height: 0;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #0a0 transparent transparent transparent;
+}
+
+.tooltip span::before, .tooltip span::after {
+  opacity: 0;
+  transition: opacity .3s ease-out;
+  display: none;
+}
+
+.tooltip span:hover::before, 
+.tooltip span:hover::after {
+  opacity: 1;
+  display: block;
+}
