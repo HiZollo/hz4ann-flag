@@ -1,0 +1,11 @@
+.collapsed {
+  display: none;
+}
+
+.open {
+  display: inherit;
+}
+
+.collapsable {
+  margin: 30px;
+}
