@@ -2,17 +2,15 @@ import { useEffect, useRef, useState } from "react"
 
 interface Coords {
   x: number;
-  y: number
+  y: number;
 }
 
 const WIDTH = 600;
 const RADIUS = 30;
 
-let ff: (p: Coords) => void;
-
 export default function() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [adjustSpeed, setAdjustSpeed] = useState<((p: Coords) => void)>();
+  const [adjustSpeed, setAdjustSpeed] = useState<({ f: (p: Coords) => void })>();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -20,20 +18,15 @@ export default function() {
     const context = canvas.getContext('2d');
     if (!context) return;
 
-    const f = draw(context);
-    ff = f;
-    setAdjustSpeed(f);
+    setAdjustSpeed({ f: draw(context) });
   }, []);
 
   function handleClick(e: React.MouseEvent<HTMLCanvasElement>) {
     const canvas = canvasRef.current as HTMLCanvasElement;
     const p = getPosition(canvas, e);
     
-    if (adjustSpeed) {
-      adjustSpeed(p);
-    }
-    if (ff) {
-      ff(p);
+    if (adjustSpeed?.f) {
+      adjustSpeed.f(p);
     }
   }
 
