@@ -7,8 +7,8 @@ interface Coords {
   y: number;
 }
 
-const WIDTH = 600;
-const RADIUS = 30;
+const WIDTH = 400;
+const RADIUS = 20;
 const INTERVAL = 10e3;
 
 export default function() {
@@ -37,6 +37,10 @@ export default function() {
   return (
     <>
       <h1>騰空</h1>
+
+      <p>這裡有一顆球，它喜歡飛翔，不喜歡撞牆</p>
+      <p>如果你讓他飛十秒，它會很感謝你的</p>
+
       <canvas
         ref={canvasRef}
         width={WIDTH}
@@ -54,7 +58,7 @@ export default function() {
 function draw(context: CanvasRenderingContext2D, setOpen: Dispatch<SetStateAction<boolean>>) {
   const position: Coords = { x: WIDTH/2, y: WIDTH/2 };
   const speed: Coords = { x: 0, y: 0 };
-  const accel: Coords = { x: 0, y: -0.5 };
+  const accel: Coords = { x: 0, y: -0.45 };
   let startTime: number = Date.now();
 
   function adjustSpeed(p: Coords) {
@@ -65,9 +69,11 @@ function draw(context: CanvasRenderingContext2D, setOpen: Dispatch<SetStateActio
     y = position.y - y;
     let mag = Math.sqrt(x * x + y * y);
 
-    speed.x += x * 30 / mag;
-    speed.y += y * 30 / mag;
+    speed.x += x * 24 / mag;
+    speed.y += y * 24 / mag;
   }
+
+  context.font = "20px sans-serif";
 
   function _draw() {
     const now = Date.now();
@@ -99,6 +105,15 @@ function draw(context: CanvasRenderingContext2D, setOpen: Dispatch<SetStateActio
     context.beginPath();
     context.arc(position.x, WIDTH - position.y, RADIUS, 0, 2 * Math.PI);
     context.fill();
+
+    const remainTime = (INTERVAL - now + startTime) / 1e3;
+    if (remainTime <= 6) {
+      context.fillStyle = "yellow";
+    }
+    else if (remainTime <= 3) {
+      context.fillStyle = "red";
+    }
+    context.fillText(remainTime.toString(), 20,  (WIDTH - 20));
 
     requestAnimationFrame(_draw);
   }
