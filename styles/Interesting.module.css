@@ -1,0 +1,10 @@
+.textarea {
+  background-color: #000;
+  padding: 15px;
+  margin: 16px;
+  color: #01ff01;
+  font-size: 16px;
+  resize: none;
+  width: calc(100% - 30px);
+  height: 500px;
+}
