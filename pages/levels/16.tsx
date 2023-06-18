@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react"
+import { PopupWrapper } from "@/components/popup";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
+import Flags from '@/data/flags.json'
 
 interface Coords {
   x: number;
@@ -7,9 +9,11 @@ interface Coords {
 
 const WIDTH = 600;
 const RADIUS = 30;
+const INTERVAL = 10e3;
 
 export default function() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [open, setOpen] = useState(false);
   const [adjustSpeed, setAdjustSpeed] = useState<({ f: (p: Coords) => void })>();
 
   useEffect(() => {
@@ -18,7 +22,7 @@ export default function() {
     const context = canvas.getContext('2d');
     if (!context) return;
 
-    setAdjustSpeed({ f: draw(context) });
+    setAdjustSpeed({ f: draw(context, setOpen) });
   }, []);
 
   function handleClick(e: React.MouseEvent<HTMLCanvasElement>) {
@@ -40,14 +44,18 @@ export default function() {
         onClick={handleClick}
         style={{ border: "1px solid green" }}
       ></canvas>
+      <PopupWrapper open={open} handleClose={() => setOpen(false)}>
+        {Flags.LEVEL16_BOUNCE}
+      </PopupWrapper>
     </>
   )
 }
 
-function draw(context: CanvasRenderingContext2D) {
+function draw(context: CanvasRenderingContext2D, setOpen: Dispatch<SetStateAction<boolean>>) {
   const position: Coords = { x: WIDTH/2, y: WIDTH/2 };
   const speed: Coords = { x: 0, y: 0 };
   const accel: Coords = { x: 0, y: -0.5 };
+  let startTime: number = Date.now();
 
   function adjustSpeed(p: Coords) {
     if (!p) return;
@@ -62,6 +70,12 @@ function draw(context: CanvasRenderingContext2D) {
   }
 
   function _draw() {
+    const now = Date.now();
+    if (now - startTime >= INTERVAL) {
+      setOpen(true);
+      return;
+    }
+
     speed.x = (speed.x + accel.x) * 0.99;
     speed.y = (speed.y + accel.y) * 0.99;
 
@@ -70,10 +84,12 @@ function draw(context: CanvasRenderingContext2D) {
     if (position.x <= RADIUS || WIDTH - RADIUS <= position.x) {
       position.x = Math.max(Math.min(position.x, WIDTH - RADIUS), RADIUS);
       speed.x = -speed.x;
+      startTime = now;
     }
     if (position.y <= RADIUS || WIDTH - RADIUS <= position.y) {
       position.y = Math.max(Math.min(position.y, WIDTH - RADIUS), RADIUS);
       speed.y = -speed.y;
+      startTime = now;
     }
 
     context.fillStyle = "black";
