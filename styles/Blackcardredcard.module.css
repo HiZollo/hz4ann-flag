@@ -1,0 +1,52 @@
+#playerChooseField {
+  margin: 30px;
+  text-align: center;
+}
+
+#playerChooseField input {
+  display: block;
+  margin: 20px;
+}
+
+#playerChooseButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-around;
+}
+
+#choiceDisplay {
+  margin: 25px;
+}
+
+#choiceDisplay td, #statusDisplay td {
+  padding: 5px 10px;
+}
+
+#nextCard {
+  margin: 20px;
+}
+
+#cardSequenceRow {
+  margin: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.card {
+  --card-width: 110px;
+  border: #00aa00 1px solid;
+  width: var(--card-width);
+  height: calc(var(--card-width) * 1.414);
+  border-radius: 5px;
+}
+
+.card.red {
+  background-color: #aa0000;
+}
+
+.card.black {
+  background-color: black;
+}
