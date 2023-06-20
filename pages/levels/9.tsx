@@ -21,7 +21,7 @@ export default function() {
   return (
     <>
       <h1>按按鈕</h1>
-      請按下方的按鈕 100 次以獲得一個 {count >= 100 ? Flags.CLICK_BUTTON : 'Flag' }
+      請按下方的按鈕 100 次以獲得一個 {count >= 100 ? Flags.LEVEL9_CLICK100 : 'Flag' }
       <div  style={{ display: 'flex', flexDirection: 'row', gap: '60px', margin: '30px' }}>
         <Button disabled={count >= disableCount.current} text="按鈕" onClick={() => setCount(v => v + 1)} />
         <Button text="重來" onClick={restart} />

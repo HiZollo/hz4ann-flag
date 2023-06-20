@@ -1,75 +1,146 @@
-import { SlowQuestionComponent, QuestionType } from '@/utils/SlowQuestion'
+import { Dispatch, useState, useEffect, useRef, useReducer } from 'react'
+import { Button } from '@/components/button'
+import { Input } from '@/components/input'
+import { PopupWrapper } from '@/components/popup'
 import Flags from '@/data/flags.json'
+import Image, { StaticImageData } from 'next/image'
+import p23_1 from '@/data/assets/23/23_1.png'
+import p23_2 from '@/data/assets/23/23_2.png'
+import p23_3 from '@/data/assets/23/23_3.png'
+import p23_4 from '@/data/assets/23/23_4.png'
+import p23_5 from '@/data/assets/23/23_5.png'
+import styles from '@/styles/GeoGuessr.module.css'
 
-const questions: Array<QuestionType> = [{
-  text: "請問下列哪個拍子不屬於複拍子？",
-  mode: "CHOOSE",
-  choice: ["6/8 拍", "12/16 拍", "3/8 拍", "6/4 拍"],
-  answer: 2
-}, {
-  text: "以 F 為下中音的大調音階的屬音做為導音的大音階，以他的平行調的中音為根音的小三和弦之五度音為？",
-  mode: "CHOOSE",
-  choice: ["D", "F#", "B", "E", "Bb"],
-  answer: 0
-}, {
-  text: "下列哪個調為降 E 小調的近系調？",
-  mode: "CHOOSE",
-  choice: ["F 大調", "F 小調", "降 E 大調", "降 D 大調", "A 大調"],
-  answer: 3
-}, {
-  text: "關係大小調的根音彼此的音程間隔為", 
-  mode: "CHOOSE",
-  choice: ["大六度", "完全五度", "大三度", "增二度"],
-  answer: 0
-}, {
-  text: "以 A 音的第八泛音為主音的大調的調號有幾個升降記號？（請以阿拉伯數字回答）",
-  mode: "INPUT",
-  answer: "5"
-}, {
-  text: "一個減六度包含幾個半音音程？（請以阿拉伯數字回答）",
-  mode: "INPUT",
-  answer: "7"
-}, {
-  text: "下列哪個音樂術語和速度無關？",
-  mode: "CHOOSE",
-  choice: ["Allegro", "Accelerando", "Ad libitum", "Cresendo", "Vivace"],
-  answer: 3
-}, {
-  text: "同一個減三和弦可以出現在幾個和聲小音階之中？（請以阿拉伯數字回答）",
-  mode: "INPUT", 
-  answer: "2"
-}, {
-  text: "在 Phrygian 教會調式音階之中，相鄰兩音的音程間隔依序為：", 
-  mode: "CHOOSE", 
-  choice: ["全全半全全全半", "半全全半全全全", "半全半全全全全", "全半全全全半全", "半全全全半全全"],
-  answer: 4
-}, {
-  text: "一個大音階的組成音總共可以構成幾個增三和弦？（請以阿拉伯數字回答）",
-  mode: "INPUT",
-  answer: "0"
-}]
+interface GeoImageProps {
+  src: StaticImageData;
+  alt: string;
+}
 
-interface StatusType { win: boolean, lose: boolean }
+type strings = [string, string, string, string, string, string];
+
+interface GeoInputProps {
+  value: string;
+  update: Dispatch<{ index: number; value: string; }>;
+  index: number;
+  placeholder: string;
+  disabled?: boolean;
+}
+
+const answers = [
+  [25.030800, 25.031000], 
+  [121.554300, 121.554600], 
+  ['australia', '澳洲', '澳大利亞', '澳大利亚'], 
+  ['brazil', 'brasil', '巴西'], 
+  ['sweden', 'sverige', '瑞典'], 
+  ['phillipines', 'pilipinas', '菲律賓', '菲律宾']
+] as const;
 
 export default function() {
+  const [correct, setCorrect] = useState(false)
+  const [wrong, setWrong] = useState(false)
+  const [disabled, setDisabled] = useState(false)
+  const [data, updateData] = useReducer((prev: strings, { index, value }: { index: number, value: string }): strings => {
+    if ((index === 0 || index === 1)) {
+      if (!/[\d\.]*/.test(value)) {
+        return prev
+      }
+      if (value.startsWith('.')) {
+        value = '0' + value
+      }
+      if (isNaN(+value)) {
+        return prev
+      }
+    }
+
+    const newData: strings = prev.slice() as strings
+    newData[index] = value
+    return newData
+  }, ['', '', '', '', '', ''])
+
+  function handleClick() {
+    if (disabled) return
+
+    if (validate(data)) {
+      setCorrect(true)
+    }
+    else {
+      setWrong(true)
+    }
+    setDisabled(true)
+  }
+
   return (
     <>
-      <h1>機智問答</h1>
-      <p>在這關，你必須完美的回答 HiZollo 對你提出的十個問題。</p>
-      <p>祝好運。</p>
-      <SlowQuestionComponent
-        questions={questions}
-        Win={Win}
-      />
+      <h1>我在哪</h1>
+      <p>在茫茫網路世界中，你迷失了方向。</p>
+      <p>在茫茫網路世界中，你亟欲尋找你的所在。</p>
+      <p>在茫茫網路世界中，你捫心自問：「我在哪裡？」</p>
+      
+
+      <GeoImage src={p23_1} alt='p23_1' />
+      北緯
+      <GeoInput value={data[0]} update={updateData} disabled={disabled} index={0} placeholder='你的緯度' />
+      東經
+      <GeoInput value={data[1]} update={updateData} disabled={disabled} index={1} placeholder='你的經度' />
+
+      <GeoImage src={p23_2} alt='p23_2' />
+      <GeoInput value={data[2]} update={updateData} disabled={disabled} index={2} placeholder='你在哪個國家' />
+
+      <GeoImage src={p23_3} alt='p23_3' />
+      <GeoInput value={data[3]} update={updateData} disabled={disabled} index={3} placeholder='你在哪個國家' />
+
+      <GeoImage src={p23_4} alt='p23_4' />
+      <GeoInput value={data[4]} update={updateData} disabled={disabled} index={4} placeholder='你在哪個國家' />
+
+      <GeoImage src={p23_5} alt='p23_5' />
+      <GeoInput value={data[5]} update={updateData} disabled={disabled} index={5} placeholder='你在哪個國家' />
+
+      <Button text='提交' className={styles['geo-button']} disabled={disabled} onClick={handleClick} />
+
+      <PopupWrapper open={correct} handleClose={() => setCorrect(false)}>
+        {Flags.LEVEL14_GEO}
+      </PopupWrapper>
+      <PopupWrapper open={wrong} handleClose={() => setWrong(false)}>
+        至少一個國家是錯的
+      </PopupWrapper>
     </>
   )
 }
 
-function Win() {
-  return (
-    <>
-      <p>恭喜你答對了所有的問題。</p>
-      <p>{Flags.LEVEL14_Q}</p>
-    </>
-  )
+function validate(data: strings): boolean {
+  if (!(answers[0][0] <= +data[0] && +data[0] <= answers[0][1])) return false;
+  if (!(answers[1][0] <= +data[1] && +data[1] <= answers[1][1])) return false;
+
+  if (!answers[2].some((v) => v === data[2])) return false;
+  if (!answers[3].some((v) => v === data[3])) return false;
+  if (!answers[4].some((v) => v === data[4])) return false;
+  if (!answers[5].some((v) => v === data[5])) return false;
+  return true;
+}
+
+function GeoImage({ src, alt }: GeoImageProps) {
+  return <Image 
+    className={styles['geo-image']}
+
+    src={src}
+    alt={alt}
+    width={700}
+    draggable={false}
+    onContextMenu={e => e.preventDefault()}
+  />
+}
+
+function GeoInput({ value, disabled, update, index, placeholder }: GeoInputProps) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    update({ index, value: e.target.value })
+  }
+
+  return <Input
+    className={styles['geo-input']}
+
+    disabled={disabled}
+    value={value}
+    onChange={handleChange}
+    placeholder={placeholder}
+  />
 }

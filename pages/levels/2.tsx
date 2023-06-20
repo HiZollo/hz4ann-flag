@@ -82,7 +82,7 @@ export default function() {
         <div className={styles.fliptripResult} style={{ backgroundColor: getColor(game.states, ended) }}></div>
       </div>
       <PopupWrapper open={open.win} handleClose={() => updateOpen({ win: false })}>
-        你完美地展示了所有可能不同的顏色，拿去吧，這面旗是屬於你的：{Flags.FLIP_TRIP}
+        你完美地展示了所有可能不同的顏色，拿去吧，這面旗是屬於你的：{Flags.LEVEL2_FLIPTRIP}
       </PopupWrapper>
       <PopupWrapper open={open.lose} handleClose={() => updateOpen({ lose: false })}>
         這個顏色已經出現過了，仔細思考再行動吧，你對色彩的敏銳度還是不夠

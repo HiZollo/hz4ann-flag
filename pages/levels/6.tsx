@@ -48,7 +48,7 @@ export default function () {
         你的故事完全是無趣的呢。
       </PopupWrapper>
       <PopupWrapper open={win} handleClose={() => setWin(false)}>
-        {Flags.LEVEL19_INTERESTING}
+        {Flags.LEVEL6_INTERESTING}
       </PopupWrapper>
     </>
   )
