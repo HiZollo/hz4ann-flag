@@ -1,11 +1,3 @@
-.collapsed {
-  display: none;
-}
-
-.open {
-  display: inherit;
-}
-
-.collapsable {
-  margin: 30px;
+.fake404-input {
+  margin: 0 0 10px 0;
 }
