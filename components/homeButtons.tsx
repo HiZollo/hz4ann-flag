@@ -9,6 +9,24 @@ import Flags from '@/data/flags.json'
 
 const Game = createContext(new LightsUp());
 
+function __(index: number, url: string) {
+  return { index, url }
+}
+
+const skipped_level = [
+  __(2, "/"),
+  __(4, "/"),
+  __(8, "/"),
+  __(9, "/"),
+  __(11, "/"),
+  __(14, "/"),
+  __(19, "/"),
+  __(21, "/"),
+  __(25, "/")
+]
+
+const skipped_level_num = skipped_level.map(v => v.index)
+
 function HomeButtons() {
   const [game, setGame] = useState(new LightsUp())
   const [open, setOpen] = useState(false)
@@ -64,10 +82,11 @@ function Button({ row, col, flip }: ButtonProps) {
 
   const state = game.board[row][col]
 
-  return (
-    <Link 
+  if (skipped_level_num.includes(index)) {
+    const { url } = skipped_level.find(v => v.index === index)!
+    return <Link 
       className={styles.levelButtonLink} 
-      href={`/levels/${index < 5 ? index : index + 1}`} 
+      href={url} 
       onClick={() => flip(row, col)}
       onContextMenu={() => flip(row, col)}
     >
@@ -75,7 +94,28 @@ function Button({ row, col, flip }: ButtonProps) {
         [styles.light]: state,
         [styles.dark]: !state
       })}>
-        {index}
+      </button>
+    </Link>
+  }
+
+  const skipped_level_count = skipped_level
+    .filter(v => v.index < index)
+    .length
+
+  const real_index = index - skipped_level_count
+
+  return (
+    <Link 
+      className={styles.levelButtonLink} 
+      href={`/levels/${real_index < 5 ? real_index : real_index + 1}`} 
+      onClick={() => flip(row, col)}
+      onContextMenu={() => flip(row, col)}
+    >
+      <button className={$(styles.levelButton, {
+        [styles.light]: state,
+        [styles.dark]: !state
+      })}>
+        {real_index}
       </button>
     </Link>
   );
