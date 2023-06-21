@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import $ from 'classnames'
-import styles from '@/styles/Fake404.module.css'
+import styles from '@/styles/Scam.module.css'
 
 import Flags from '@/data/flags.json';
 import { Input } from '@/components/input';
@@ -27,6 +27,7 @@ export default function Page() {
   const [open, setOpen] = useState(false);
   const [noName, setNoName] = useState(false);
   const [noWant, setNoWant] = useState(false);
+  const [scamed, setScamed] = useState(false);
 
   useEffect(() => {
     const n = (Date.now() - START_TIME) / 1000 / 60;
@@ -34,6 +35,7 @@ export default function Page() {
   }, []);
 
   function handleClick() {
+    if (scamed) return
     if (!name.length) {
       setNoName(true);
     }
@@ -43,6 +45,7 @@ export default function Page() {
     else {
       sendMessage({ name, want });
       setOpen(true);
+      setScamed(true)
     }
   }
 
@@ -56,7 +59,7 @@ export default function Page() {
 
     <ScamInput value={name} setValue={setName} placeholder="您的Discord 名稱或 帳號id" />
     <ScamInput value={want} setValue={setWant} placeholder="您想要的禮品" />
-    <Button text='提交' onClick={handleClick} />
+    <Button text='提交' onClick={handleClick} disabled={scamed}/>
 
     <PopupWrapper open={noName} handleClose={() => setNoName(false)}>
       拜託您 輸入您的Discord 名稱或 帳號id
@@ -65,15 +68,27 @@ export default function Page() {
       拜託您 輸入您想要的禮品
     </PopupWrapper>
     <PopupWrapper open={open} handleClose={() => setOpen(false)}>
-      謝謝您的提交,這是HiZollo 的一點心意,請收下 {Flags.LEVEL5_FAKE404}
+      謝謝您的提交,這是HiZollo 的一點心意,請收下 {Flags.LEVEL5_SCAM}
     </PopupWrapper>
   </>
 }
 
-
 // TODO
-function sendMessage({ name, want }: Message) {
-  console.log(name, want);
+function encrypt(id: string) {
+  return id
+}
+
+function sendMessage(data: Message) {
+  const id = encrypt(Date.now().toString())
+
+  fetch("/api/gift", {
+    body: JSON.stringify({ ...data, id }),
+    method: "POST",
+    cache: "no-cache",
+    headers: {
+      Authorization: "test"
+    }
+  })
 }
 
 function ScamInput({ value, setValue, placeholder }: ScamInputProps) {
@@ -82,7 +97,7 @@ function ScamInput({ value, setValue, placeholder }: ScamInputProps) {
   }
 
   return <Input
-    className={styles['fake404-input']}
+    className={styles['scam-input']}
     value={value}
     onChange={handleChange}
     placeholder={placeholder}
