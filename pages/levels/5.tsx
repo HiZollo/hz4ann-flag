@@ -85,9 +85,6 @@ function sendMessage(data: Message) {
     body: JSON.stringify({ ...data, id }),
     method: "POST",
     cache: "no-cache",
-    headers: {
-      Authorization: "test"
-    }
   })
 }
 
