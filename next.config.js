@@ -3,14 +3,13 @@ const WebpackObfuscator = require('webpack-obfuscator')
 const ObfuscatorOptions = {
   compact: true,
   deadCodeInjection: true,
-  deadCodeInjectionThreshold: 0.3,
+  deadCodeInjectionThreshold: 0.1,
   debugProtection: true,
-  debugProtectionInterval: 10000,
+  debugProtectionInterval: 4000,
+  disableConsoleOutput: true,
   identifierNamesGenerator: 'hexadecimal',
   selfDefending: true,
   stringArray: true,
-  stringArrayCallsTransform: true,
-  stringArrayCallsTransformThreshold: 0.7,
   stringArrayEncoding: ['rc4'],
 }
 
