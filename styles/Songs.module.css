@@ -1,0 +1,20 @@
+#stage {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin: 30px;
+}
+
+#stage > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#stage > div:nth-child(2) {
+  gap: 50px;
+}
+
+#stage > div:nth-child(3) {
+  gap: 130px;
+}
