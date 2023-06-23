@@ -1,4 +1,4 @@
-import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
@@ -32,7 +32,7 @@ const answers = [
   [6, 8, 3, 5, 7, 3, 9, 10, 1, 8]
 ]
 
-export const getStaticProps: GetStaticProps = () => {
+export const getServerSideProps: GetServerSideProps<{ question: number } > = async () => {
   return {
     props: {
       question: ~~(Math.random() * answers.length) + 1
@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps = () => {
   }
 }
 
-export default function({ question }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function({ question }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [played, setPlayed] = useState(false)
   const [nowIndex, setNowIndex] = useState(0)
   const [wrong, setWrong] = useState(false)
@@ -82,7 +82,7 @@ export default function({ question }: InferGetStaticPropsType<typeof getStaticPr
 
       <Button text="開始播放" disabled={played || wrong} onClick={playAudio} style={{ margin: '30px' }} />
       <audio ref={audioRef}>
-        <source src={`/resources/3/${question}.mp3`} />
+        <source src={`/resources/4/${question}.mp3`} />
       </audio>
 
       <div style={{ display:'flex', flexFlow: 'row wrap', gap: '10px', margin: '12px', justifyContent: 'center' }}>
