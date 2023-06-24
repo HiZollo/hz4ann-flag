@@ -61,7 +61,7 @@ export default function() {
         style={{ border: "1px solid green" }}
       ></canvas>
 
-      <PopupWrapper open={open} handleClose={() => setOpen(false)}>
+      <PopupWrapper open={open && !dead} handleClose={() => setOpen(false)}>
         {Flags.LEVEL16_BOUNCE}
       </PopupWrapper>
       <PopupWrapper open={dead} handleClose={() => setDead(false)}>
