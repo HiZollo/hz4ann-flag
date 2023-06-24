@@ -14,6 +14,7 @@ const INTERVAL = 10e3;
 export default function() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [open, setOpen] = useState(false);
+  const [dead, setDead] = useState(false);
   const [adjustSpeed, setAdjustSpeed] = useState<({ f: (p: Coords) => void })>();
 
   useEffect(() => {
@@ -22,7 +23,18 @@ export default function() {
     const context = canvas.getContext('2d');
     if (!context) return;
 
-    setAdjustSpeed({ f: draw(context, setOpen) });
+    const { adjustSpeed: f, caughtCheat } = draw(context, setOpen);
+    setAdjustSpeed({ f });
+
+    function onVisibilityChange() {
+      caughtCheat();
+      setDead(true);
+    }
+
+    window.addEventListener("visibilitychange", onVisibilityChange);
+    return () => {
+      window.removeEventListener("visibilitychange", onVisibilityChange);
+    }
   }, []);
 
   function handleClick(e: React.MouseEvent<HTMLCanvasElement>) {
@@ -48,8 +60,12 @@ export default function() {
         onClick={handleClick}
         style={{ border: "1px solid green" }}
       ></canvas>
+
       <PopupWrapper open={open} handleClose={() => setOpen(false)}>
         {Flags.LEVEL16_BOUNCE}
+      </PopupWrapper>
+      <PopupWrapper open={dead} handleClose={() => setDead(false)}>
+        切掉視窗是作弊行為，因此你遭受了懲罰
       </PopupWrapper>
     </>
   )
@@ -60,6 +76,7 @@ function draw(context: CanvasRenderingContext2D, setOpen: Dispatch<SetStateActio
   const speed: Coords = { x: 0, y: 0 };
   const accel: Coords = { x: 0, y: -0.45 };
   let startTime: number = Date.now();
+  let cheat = false;
 
   function adjustSpeed(p: Coords) {
     if (!p) return;
@@ -73,12 +90,19 @@ function draw(context: CanvasRenderingContext2D, setOpen: Dispatch<SetStateActio
     speed.y += y * 24 / mag;
   }
 
+  function caughtCheat() {
+    cheat = true;
+  }
+
   context.font = "20px sans-serif";
 
   function _draw() {
     const now = Date.now();
     if (now - startTime >= INTERVAL) {
       setOpen(true);
+      return;
+    }
+    if (cheat) {
       return;
     }
 
@@ -119,7 +143,7 @@ function draw(context: CanvasRenderingContext2D, setOpen: Dispatch<SetStateActio
   }
   requestAnimationFrame(_draw);
 
-  return adjustSpeed;
+  return { adjustSpeed, caughtCheat };
 }
 
 function getPosition(canvas: HTMLCanvasElement, event: React.MouseEvent<HTMLCanvasElement>): Coords {
