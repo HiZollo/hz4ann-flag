@@ -8,8 +8,6 @@ import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 import { PopupWrapper } from '@/components/popup';
 
-const AES_KEY = "8cb75f9082d0ef2c200d8209bf9e477453767d8678b32f059861e4817ba7003f";
-
 interface ScamInputProps {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
@@ -81,7 +79,10 @@ function format(time: number) {
 }
 
 function encrypt(data: string) {
-  return CryptoJS.AES.encrypt(data, AES_KEY).toString();
+  if (!process.env.NEXT_PUBLIC_SECRET_KEY) {
+    return null;
+  }
+  return CryptoJS.AES.encrypt(data, process.env.NEXT_PUBLIC_SECRET_KEY).toString();
 }
 
 function sendMessage(data: Message) {

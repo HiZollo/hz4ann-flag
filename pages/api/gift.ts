@@ -2,8 +2,6 @@ import CryptoJS from 'crypto-js';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
 
-const AES_KEY = "8cb75f9082d0ef2c200d8209bf9e477453767d8678b32f059861e4817ba7003f";
-
 interface PostBodyReceived {
   name?: string
   want?: string
@@ -39,7 +37,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       const { name, want, id } = body
 
       const token = decrypt(id)
-      
+      if (!token) {
+        res.status(500).json({ error: 'internal error' })
+        return
+      }
+
       if (!check_token_pattern(token)) {
         res.status(401).json({ error: 'unauthorized' })
         return
@@ -98,7 +100,11 @@ function sendToDiscordWebhook({
 }
 
 function decrypt(data: string) {
-  const bytes = CryptoJS.AES.decrypt(data, AES_KEY);
+  if (!process.env.NEXT_PUBLIC_SECRET_KEY) {
+    return null;
+  }
+
+  const bytes = CryptoJS.AES.decrypt(data, process.env.NEXT_PUBLIC_SECRET_KEY);
   const text = bytes.toString(CryptoJS.enc.Utf8);
   return text;
 }
