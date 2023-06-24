@@ -1,11 +1,14 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
-import $ from 'classnames'
+// import { createSecretKey, createCipheriv } from 'crypto'
+import CryptoJS from 'crypto-js';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styles from '@/styles/Scam.module.css'
 
 import Flags from '@/data/flags.json';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 import { PopupWrapper } from '@/components/popup';
+
+const AES_KEY = "8cb75f9082d0ef2c200d8209bf9e477453767d8678b32f059861e4817ba7003f";
 
 interface ScamInputProps {
   value: string;
@@ -73,13 +76,16 @@ export default function Page() {
   </>
 }
 
-// TODO
-function encrypt(id: string) {
-  return id
+function format(time: number) {
+  return `I_WANT_${time}_PINEAPPLE_PIZZA`;
+}
+
+function encrypt(data: string) {
+  return CryptoJS.AES.encrypt(data, AES_KEY).toString();
 }
 
 function sendMessage(data: Message) {
-  const id = encrypt(Date.now().toString())
+  const id = encrypt(format(Date.now()))
 
   fetch("/api/gift", {
     body: JSON.stringify({ ...data, id }),

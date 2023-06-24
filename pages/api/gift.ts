@@ -1,5 +1,8 @@
+import CryptoJS from 'crypto-js';
 import type { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
+
+const AES_KEY = "8cb75f9082d0ef2c200d8209bf9e477453767d8678b32f059861e4817ba7003f";
 
 interface PostBodyReceived {
   name?: string
@@ -18,6 +21,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(400).json({ error: 'bad request' })
       return
     }
+
     
     try {
       const body = JSON.parse(req.body) as PostBodyReceived
@@ -50,7 +54,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(201).json({ send: true, gift: want })
       return
     } catch(e) {
+      console.log(e)
       res.status(400).json({ error: 'bad request' })
+      return
     }
   }
   res.status(405).json({ error: "method not allowed" })
@@ -91,11 +97,18 @@ function sendToDiscordWebhook({
   })
 }
 
-// TODO
-function decrypt(id: string) {
-  return id
+function decrypt(data: string) {
+  const bytes = CryptoJS.AES.decrypt(data, AES_KEY);
+  const text = bytes.toString(CryptoJS.enc.Utf8);
+  return text;
 }
 
 function check_token_pattern(token: string) {
-  return true
+  const result = token.match(/I_WANT_(\d+?)_PINEAPPLE_PIZZA/);
+  if (!result) return false;
+
+  const time = Number(result[1]);
+  if (isNaN(time)) return false;
+
+  return Date.now() - time <= 1e3;
 }
