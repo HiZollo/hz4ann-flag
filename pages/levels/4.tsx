@@ -1,4 +1,3 @@
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
@@ -32,21 +31,20 @@ const answers = [
   [6, 8, 3, 5, 7, 3, 9, 10, 1, 8]
 ]
 
-export const getServerSideProps: GetServerSideProps<{ question: number } > = async () => {
-  return {
-    props: {
-      question: ~~(Math.random() * answers.length) + 1
-    }
-  }
-}
-
-export default function({ question }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function() {
+  const { current: question } = useRef(~~(Math.random() * 20) + 1)
+  const audioRef = useRef<HTMLAudioElement>(null)
   const [played, setPlayed] = useState(false)
   const [nowIndex, setNowIndex] = useState(0)
   const [wrong, setWrong] = useState(false)
   const [open, setOpen] = useState(false)
   const answer = answers[question - 1]
-  const audioRef = useRef<HTMLAudioElement>(null)
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.src = `/resources/4/${question}.mp3`
+    }
+  }, [])
 
   const attempt = (ans: number) => {
     if (wrong) return
@@ -81,9 +79,7 @@ export default function({ question }: InferGetServerSidePropsType<typeof getServ
       <p>你必須完全正確的答對以獲得一個 Flag</p>
 
       <Button text="開始播放" disabled={played || wrong} onClick={playAudio} style={{ margin: '30px' }} />
-      <audio ref={audioRef}>
-        <source src={`/resources/4/${question}.mp3`} />
-      </audio>
+      <audio ref={audioRef} src="" />
 
       <div style={{ display:'flex', flexFlow: 'row wrap', gap: '10px', margin: '12px', justifyContent: 'center' }}>
         {translate.map((v, i) => {
