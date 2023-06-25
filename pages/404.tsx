@@ -16,7 +16,7 @@ export default function Page() {
     <h1>404</h1>
     <Button onClick={play} text="播放" disabled={disabled} />
     <audio ref={audioRef}>
-      <source src="resources/404/audio.wav" />
+      <source src="/resources/404/audio.wav" />
     </audio>
   </>
 }
