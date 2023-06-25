@@ -75,8 +75,8 @@ export default function() {
   return (
     <>
       <h1>音程聽力測驗</h1>
-      <p>請聆聽以下音檔，並依照和聲出現的順序點擊對應的音程按鈕。</p>
-      <p>你必須完全正確的答對以獲得一個 Flag</p>
+      <p>請聆聽以下音檔，並依照和聲出現的順序點擊對應的音程按鈕</p>
+      <p>你必須依序正確辨識所有音程以獲得一面旗子</p>
 
       <Button text="開始播放" disabled={played || wrong} onClick={playAudio} style={{ margin: '30px' }} />
       <audio ref={audioRef} src="" />

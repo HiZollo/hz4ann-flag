@@ -36,7 +36,9 @@ export default function() {
 
   return (
     <>
-      <p>聽過二維魔方嗎？</p>
+      <h1>魔術方塊</h1>
+      <p>三維的魔方太難了，這邊有一顆二維的</p>
+      <p>由左而右、由上而下排序就好，我相信你的智慧</p>
 
       <Board board={board} setBoard={setBoard} disabled={win} />
       <PopupWrapper open={open} handleClose={() => setOpen(false)}>

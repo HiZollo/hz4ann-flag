@@ -32,13 +32,17 @@ export default function () {
       setWin(true)
     }
 
+    setStory('')
     setEnd(true)
   }
   
   return (
     <>
       <h1>寫故事</h1>
-      請寫一個 300 字以上且有趣的故事。
+      <p>好無聊…我在這裡只有孤單一個人</p>
+      <p>你可以跟我說個有趣的故事嗎？</p>
+      <p>最好是超過 300 個字，謝謝你</p>
+
       <textarea className={styles.textarea} value={story} onChange={handleChange} disabled={end} />
       <Button text="送出" onClick={submit} disabled={end}/>
       <PopupWrapper open={not300} handleClose={() => setNot300(false)}>
