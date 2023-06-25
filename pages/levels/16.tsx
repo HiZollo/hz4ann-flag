@@ -15,6 +15,7 @@ export default function() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [open, setOpen] = useState(false);
   const [dead, setDead] = useState(false);
+  const [deadOpen, setDeadOpen] = useState(false);
   const [adjustSpeed, setAdjustSpeed] = useState<({ f: (p: Coords) => void })>();
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function() {
     function onVisibilityChange() {
       caughtCheat();
       setDead(true);
+      setDeadOpen(true);
     }
 
     window.addEventListener("visibilitychange", onVisibilityChange);
@@ -64,7 +66,7 @@ export default function() {
       <PopupWrapper open={open && !dead} handleClose={() => setOpen(false)}>
         {Flags.LEVEL16_BOUNCE}
       </PopupWrapper>
-      <PopupWrapper open={dead} handleClose={() => setDead(false)}>
+      <PopupWrapper open={dead} handleClose={() => setDeadOpen(false)}>
         切掉視窗是作弊行為，因此你遭受了懲罰
       </PopupWrapper>
     </>
@@ -98,11 +100,12 @@ function draw(context: CanvasRenderingContext2D, setOpen: Dispatch<SetStateActio
 
   function _draw() {
     const now = Date.now();
-    if (now - startTime >= INTERVAL) {
-      setOpen(true);
+    if (cheat) {
+      setOpen(false);
       return;
     }
-    if (cheat) {
+    if (now - startTime >= INTERVAL) {
+      setOpen(true);
       return;
     }
 
