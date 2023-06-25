@@ -14,14 +14,14 @@ function __(index: number, url: string) {
 }
 
 const skipped_level = [
-  __(2, "/"),
-  __(4, "/"),
-  __(8, "/"),
-  __(11, "/"),
-  __(14, "/"),
-  __(17, "/"),
-  __(21, "/"),
-  __(25, "/")
+  __(2, "/ra"),
+  __(4, "/ra"),
+  __(8, "/ra"),
+  __(11, "/ra"),
+  __(14, "/ra"),
+  __(17, "/ra"),
+  __(21, "/ra"),
+  __(25, "/ra")
 ]
 
 const skipped_level_num = skipped_level.map(v => v.index)
