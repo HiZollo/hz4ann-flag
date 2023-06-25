@@ -11,9 +11,7 @@ const flags = Object.values(Flags)
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
-    const auth = getAuthHeader(req)
-    console.log(auth)
-    console.log(process.env.FLAG_SECRET)
+    const auth = req.headers.authorization as string
 
     if (!auth) {
       res.status(401).json({ error: 'unauthorized' })
@@ -40,15 +38,4 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   res.status(405).json({ error: "method not allowed" })
-}
-
-function getAuthHeader(req: NextApiRequest) {
-  const { rawHeaders } = req
-  console.log(rawHeaders)
-  const i = rawHeaders.findIndex(v => v === 'Authorization')
-  console.log(rawHeaders.length)
-  console.log(i)
-  if (i === -1) return null
-  if (i === rawHeaders.length - 1) return null
-  return rawHeaders[i + 1]
 }
