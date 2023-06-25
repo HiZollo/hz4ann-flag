@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import Flags from '@/data/flags.json'
 
 const flags = Object.values(Flags)
+  .sort()
   .map(flag => {
     const matches = flag.match(/hz4ann_flag_{(.+)}/)
     return matches![1]
@@ -29,12 +30,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       return 
     }
 
-    if (flags.includes(flag)) {
-      res.status(200).json({ result: true })
-      return
-    }
+    const id = flags.findIndex(f => f === flag)
 
-    res.status(200).json({ result: false })
+    res.status(200).json({ result: id })
+
     return
   }
 
