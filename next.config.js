@@ -6,7 +6,6 @@ const ObfuscatorOptions = {
   deadCodeInjectionThreshold: 0.1,
   debugProtection: true,
   debugProtectionInterval: 4000,
-  disableConsoleOutput: true,
   identifierNamesGenerator: 'hexadecimal',
   selfDefending: true,
   stringArray: true,
