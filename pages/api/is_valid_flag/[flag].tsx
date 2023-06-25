@@ -12,6 +12,8 @@ const flags = Object.values(Flags)
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
     const auth = getAuthHeader(req)
+    console.log(auth)
+    console.log(process.env.FLAG_SECRET)
 
     if (!auth) {
       res.status(401).json({ error: 'unauthorized' })
