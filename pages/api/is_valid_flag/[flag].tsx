@@ -44,7 +44,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
 function getAuthHeader(req: NextApiRequest) {
   const { rawHeaders } = req
+  console.log(rawHeaders)
   const i = rawHeaders.findIndex(v => v === 'Authorization')
+  console.log(rawHeaders.length)
+  console.log(i)
   if (i === -1) return null
   if (i === rawHeaders.length - 1) return null
   return rawHeaders[i + 1]
