@@ -35,7 +35,7 @@ const answer = {
   q4: ["medicamentum", "carta nominis", "calamus", "culter"],
   q5: "Zollus",
   q6: "Octavia",
-  q7: "Et tu, Octavia."
+  q7: "Et tu, Octavia?"
 } as const
 
 interface AnswerType {
