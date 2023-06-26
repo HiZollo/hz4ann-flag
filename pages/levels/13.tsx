@@ -185,7 +185,7 @@ export default function() {
             key={i}
             disabled={disabled}
             value={input.q4[i] ?? ""}
-            placeholder={`Nomen resi ${LatinOrdinalNumbersFeminineGenitiveSingle[i]} scribe`}
+            placeholder={`Nomen rei ${LatinOrdinalNumbersFeminineGenitiveSingle[i]} scribe`}
             onChange={(e: React.SyntheticEvent<HTMLInputElement>) => dispatch({ question: "q4", update: [i, e.currentTarget.value] })}
           />
         })
