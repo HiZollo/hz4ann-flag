@@ -127,10 +127,10 @@ export default function() {
         input.q2[1] === answer.q2[1] &&
         input.q2[2] === answer.q2[2] &&
         input.q3 === answer.q3 &&
-        input.q4[0] === answer.q4[0] &&
-        input.q4[1] === answer.q4[1] &&
-        input.q4[2] === answer.q4[2] &&
-        input.q4[3] === answer.q4[3] &&
+        input.q4[0].toLowerCase() === answer.q4[0] &&
+        input.q4[1].toLowerCase() === answer.q4[1] &&
+        input.q4[2].toLowerCase() === answer.q4[2] &&
+        input.q4[3].toLowerCase() === answer.q4[3] &&
         input.q5 === answer.q5 &&
         input.q6 === answer.q6 &&
         input.q7 === answer.q7) {
