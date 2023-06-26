@@ -1,6 +1,6 @@
 import { PopupWrapper } from "@/components/popup";
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 interface Coords {
   x: number;

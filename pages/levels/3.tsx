@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import styles from '@/styles/RubiksCube.module.css';
 import { PopupWrapper } from '@/components/popup';
 
-import Flags from '@/data/flags.json';
+import Flags from '@/utils/flagUtils';
 
 const BOARD_SIZE = 4;
 const SHUFFLE_COUNT = 10 * BOARD_SIZE;

@@ -3,7 +3,7 @@ import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
 import styles from '@/styles/Interesting.module.css'
 
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 export default function () {
   const [story, setStory] = useState("")

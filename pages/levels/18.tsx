@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Flags from '@/data/flags.json';
+import Flags from '@/utils/flagUtils';
 import { MathJax, MathJaxProvider } from '@cutting/use-mathjax';
 
 const PRIME_SIZE = 256;

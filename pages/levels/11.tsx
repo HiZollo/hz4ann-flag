@@ -4,7 +4,7 @@ import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
 import styles from '@/styles/GuessAB.module.css'
 
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 const MAX_ATTEMPT_COUNT = 10 as const
 

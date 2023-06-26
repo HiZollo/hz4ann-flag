@@ -4,7 +4,7 @@ import { PopupWrapper } from '@/components/popup';
 import { TypingTextArea } from '@/components/typingTextArea'
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
-import Flags from '@/data/flags.json';
+import Flags from '@/utils/flagUtils';
 import styles from '@/styles/Storyteller.module.css'
 
 function getSubsequence<T>(arr: Array<T>, count: number) {

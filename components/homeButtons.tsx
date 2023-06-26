@@ -5,7 +5,7 @@ import styles from '@/styles/Home.module.css'
 import { LightsUp } from '@/utils/LightsUp'
 import { PopupWrapper } from '@/components/popup'
 
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 const Game = createContext(new LightsUp());
 

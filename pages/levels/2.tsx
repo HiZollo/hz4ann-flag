@@ -4,7 +4,7 @@ import styles from '@/styles/FlipTrip.module.css'
 import { FlipTrip } from "@/utils/FlipTrip";
 import { PopupWrapper } from '@/components/popup'
 import { Button } from "@/components/button";
-import Flags from '@/data/flags.json';
+import Flags from '@/utils/flagUtils';
 
 const COLORS = 3;
 const SIZE = 4;

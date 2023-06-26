@@ -2,7 +2,7 @@ import { Dispatch, useState, useEffect, useRef, useReducer } from 'react'
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import { PopupWrapper } from '@/components/popup'
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 import Image, { StaticImageData } from 'next/image'
 import p23_1 from '@/data/assets/23/23_1.png'
 import p23_2 from '@/data/assets/23/23_2.png'

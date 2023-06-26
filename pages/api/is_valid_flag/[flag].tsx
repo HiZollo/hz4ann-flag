@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 const flags = Object.values(Flags)
   .sort()

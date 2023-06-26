@@ -5,7 +5,7 @@ import { Input } from '@/components/input'
 import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
 
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 import styles from '@/styles/Blackcardredcard.module.css'
 

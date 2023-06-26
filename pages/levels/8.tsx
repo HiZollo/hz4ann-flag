@@ -5,7 +5,7 @@ import { PopupWrapper } from '@/components/popup'
 import styles from '@/styles/Typing.module.css'
 import $ from 'classnames'
 
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 const text = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna ut enim veniam quis exercitation nisi ut aliquip ex ea comodo consequat eu fugiat nulla excepteur sunt in culpa deserunt id est laborum."
 

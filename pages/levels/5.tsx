@@ -3,7 +3,7 @@ import CryptoJS from 'crypto-js';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import styles from '@/styles/Scam.module.css'
 
-import Flags from '@/data/flags.json';
+import Flags from '@/utils/flagUtils';
 import { Input } from '@/components/input';
 import { Button } from '@/components/button';
 import { PopupWrapper } from '@/components/popup';

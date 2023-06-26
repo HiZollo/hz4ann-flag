@@ -5,7 +5,7 @@ import { PopupWrapper } from '@/components/popup'
 
 import styles from '@/styles/Songs.module.css'
 
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 const HAS_TO_GUESSED = 4
 

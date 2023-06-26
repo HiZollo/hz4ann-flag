@@ -4,7 +4,7 @@ import { PopupWrapper } from '@/components/popup';
 import { useState } from 'react';
 import { MathJax, MathJaxProvider } from '@cutting/use-mathjax';
 
-import Flags from '@/data/flags.json';
+import Flags from '@/utils/flagUtils';
 import styles from '@/styles/Formula.module.css';
 
 const ANS = 28;

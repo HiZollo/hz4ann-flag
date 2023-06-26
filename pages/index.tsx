@@ -6,7 +6,7 @@ import { PopupWrapper } from '@/components/popup'
 import { HomeButtons } from '@/components/homeButtons'
 import { TypingTextArea } from '@/components/typingTextArea'
 
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 export default function Home() {
   const [open, setOpen] = useState(false)

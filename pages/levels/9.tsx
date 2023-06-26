@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 export default function() {
   const [count, setCount] = useState(0)

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 const translate = ['完全一度', '小二度', '大二度', '小三度', '大三度', '完全四度', '增四度', '完全五度', '小六度', '大六度', '小七度', '大七度', '完全八度']
 

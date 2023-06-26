@@ -4,7 +4,7 @@ import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
 import { TypingTextArea } from '@/components/typingTextArea'
 
-import Flags from '@/data/flags.json'
+import Flags from '@/utils/flagUtils';
 
 const letter = 
 `Hail Zollo,
