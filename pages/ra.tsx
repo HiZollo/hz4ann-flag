@@ -13,7 +13,6 @@ export default function Page() {
   }
 
   useEffect(() => {
-    console.log(play)
     do {
       if (!play) break
       if (!videoRef.current) break

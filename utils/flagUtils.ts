@@ -8,7 +8,6 @@ function decrypt(flags: { [key: string]: string }) {
   for (const key in flags) {
     origin[key] = format(swapn(mul(add(flags[key], -4), BigInt(91), BigInt(13)), [[1,2], [2,3], [3,4], [4,5], [1,5], [1,4], [1,3]]));
   }
-  console.log(origin)
 
   return origin;
 }
