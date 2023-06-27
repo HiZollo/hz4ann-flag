@@ -3,7 +3,6 @@ import { Input } from '@/components/input'
 import { Button } from '@/components/button'
 import { PopupWrapper } from '@/components/popup'
 import styles from '@/styles/Typing.module.css'
-import $ from 'classnames'
 
 import Flags from '@/utils/flagUtils';
 
@@ -11,8 +10,12 @@ const text = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eius
 
 export default function () {
   const [words, setWords] = useState<string[]>([])
-  const [input, setInput] = useState("")
   const [currWordIndex, setCurrWordIndex] = useState(0)
+  const [finishedWords, setFinishedWords] = useState<string[]>([])
+  const [unfinishedWords, setUnfinishedWords] = useState<string[]>([])
+
+
+  const [input, setInput] = useState("")
   const [disabled, setDisabled] = useState(false)
   const [failed, setFailed] = useState(false)
   const [win, setWin] = useState(false)
@@ -22,7 +25,9 @@ export default function () {
   const [endTime, setEndTime] = useState(0)
 
   useEffect(() => {
-    setWords(text.split(" "))
+    const w = text.split(" ")
+    setWords(w)
+    setUnfinishedWords(w.slice(1))
     setStartTime(Date.now())
   }, [])
 
@@ -30,16 +35,16 @@ export default function () {
     setInput(currentTarget.value.trim())
   }
 
-  const handleKeyDown = ({ keyCode, key }: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = ({ keyCode }: React.KeyboardEvent<HTMLInputElement>) => {
     // Space and Enter
     if (keyCode === 32 || keyCode === 13) {
-      if (checkMatch()) {
+      if (words[currWordIndex] === input.trim()) {
         setInput("")
         if (currWordIndex < words.length - 1) {
-          setCurrWordIndex(now => now + 1)
+          increment()
           return
         }
-        setCurrWordIndex(now => now + 1)
+        increment()
         winning()
         return
       }
@@ -48,9 +53,10 @@ export default function () {
     }
   }
 
-  const checkMatch = () => {
-    const wordToCompare = words[currWordIndex]
-    return wordToCompare === input.trim()
+  function increment() {
+    setFinishedWords(now => [...now, words[currWordIndex]])
+    setUnfinishedWords(unfinishedWords.splice(1))
+    setCurrWordIndex(now => now + 1)
   }
 
   function fail() {
@@ -76,19 +82,18 @@ export default function () {
   return (
     <>
       <h1>Typing</h1>
-      Flag 將在一分鐘後失效。
+      <p>Flag 將在一分鐘後失效。</p>
+
       <div id={styles.wordList}>
       {
-        words.map((w, i) => <span key={i} className={
-          $({ 
-            [styles.finished]: i < currWordIndex,
-            [styles.now]: !failed && currWordIndex === i,
-            [styles.unfinished]: i > currWordIndex || (failed && currWordIndex === i)
-          })
-        }>
-          <span>{w}</span>
-          <span> </span>
-        </span>)
+        failed ?
+          <span className={styles.unfinished}>{words.join(' ')}</span>
+          :
+          <>
+            <span className={styles.finished}>{finishedWords.join(' ')} </span>
+            <span className={styles.now}>{words[currWordIndex]} </span>
+            <span className={styles.unfinished}>{unfinishedWords.join(' ')}</span>
+          </>
       }
       </div>
       <Input 
