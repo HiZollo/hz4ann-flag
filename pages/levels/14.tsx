@@ -1,4 +1,4 @@
-import { Dispatch, useState, useEffect, useRef, useReducer } from 'react'
+import { Dispatch, useState, useReducer } from 'react'
 import { Button } from '@/components/button'
 import { Input } from '@/components/input'
 import { PopupWrapper } from '@/components/popup'
@@ -26,14 +26,16 @@ interface GeoInputProps {
   disabled?: boolean;
 }
 
-const answers = [
-  [25.030800, 25.031000], 
-  [121.554300, 121.554600], 
-  ['australia', '澳洲', '澳大利亞', '澳大利亚'], 
-  ['brazil', 'brasil', '巴西'], 
-  ['sweden', 'sverige', '瑞典'], 
-  ['phillipines', 'pilipinas', '菲律賓', '菲律宾']
-] as const;
+const _answers = [
+  [BigInt(1193609890), BigInt(2045473354)], 
+  [BigInt(3386779088), BigInt(1425478490)], 
+  ['c585f1decb986f7ff19b8d03deba346ab8a0494cc1e4d69ad9b8acb0dfbeab6f', '740b19c56c99ffe20a3ef649b0d0a8262b8f34fa89301d8f8fd7bc996a9fa3ce', '19c9cbe3b6c304346a171fe0846cfcf92cd4750934fc4f9180bc01de723d00fe', '0b1001a02c971a01ebc585b5cb04897b35e4cb4b8cb6f91bddd2b5c622064441'], 
+  ['5c8f52ca28966103ff0aad98160bc8e978c9ca0285a2043a521481d11ed17506', 'b08b0a5c8892079ef20854589792e05957f60ac9bea6e58b0320550d752a0bb3', 'c733bdf600026d8c7942bb046ce25c49e2a86271fd391286b5bc5dafba174eb7'], 
+  ['295099c764e6439694e99d2c5be4b5f9fbd84b7826dcfcc7704f16585fbf42bf', '2ee7f7fb61c0d9bef4b62a1dcc244f8f55806ac0a5cb1273687871a863510e4c', 'af02be73f1a847f8621367d9035be5f87e1145886e942001607e08978ed135b3'], 
+  ['282276ddea50435169cc73e02fab90514ee83f9329a7eb9a22979d0b9f570297', '8e9c83744feccc36764e6c25a55b876b65e21f903c0295c5c234a91c48988e7a', '312c0b09d2ccc9f816393aa9a7e4e9162b5003031d14b4ecaf68aa96f0563fe4', 'f1e3c16bbd633ea456f11c7c4d83292497a24e8b2163bf6a47bc285b01f1f84d']
+];
+
+const answers = decrypt(_answers) as [bigint[], bigint[], string[], string[], string[], string[]];
 
 export default function() {
   const [correct, setCorrect] = useState(false)
@@ -57,10 +59,10 @@ export default function() {
     return newData
   }, ['', '', '', '', '', ''])
 
-  function handleClick() {
+  async function handleClick() {
     if (disabled) return
 
-    if (validate(data)) {
+    if (await validate(data)) {
       setCorrect(true)
     }
     else {
@@ -107,14 +109,61 @@ export default function() {
   )
 }
 
-function validate(data: strings): boolean {
+// https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest
+async function digestMessage(message: string) {
+  const msgUint8 = new TextEncoder().encode(message); // encode as (utf-8) Uint8Array
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgUint8); // hash the message
+  const hashArray = Array.from(new Uint8Array(hashBuffer)); // convert buffer to byte array
+  const hashHex = hashArray
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join(""); // convert bytes to hex string
+  return hashHex;
+}
+
+function power(x: bigint, y: bigint, p: bigint) {
+  const bits: bigint[] = [];
+  while (y > BigInt(1)) {
+    bits.unshift(y & BigInt(1));
+    y >>= BigInt(1);
+  }
+
+  let t = x % p;
+  bits.forEach(b => {
+    t = (t * t) % p;
+    if (b === BigInt(1)) t = (t * x) % p;
+  });
+  return t;
+}
+
+function decrypt(a: typeof _answers) {
+  const result: (string[] | number[])[] = [];
+  a.forEach(ans => {
+    if (typeof ans[0] === 'bigint' && typeof ans[1] === 'bigint') {
+      result.push([
+        Number(power(ans[0], BigInt(49757), BigInt(61627) * BigInt(63197))) / 1000000, 
+        Number(power(ans[1], BigInt(49757), BigInt(61627) * BigInt(63197))) / 1000000
+      ]);
+    }
+    else {
+      result.push(ans.map(a => `${a}`));
+    }
+  });
+  return result;
+}
+
+async function validate(data: strings): Promise<boolean> {
   if (!(answers[0][0] <= +data[0] && +data[0] <= answers[0][1])) return false;
   if (!(answers[1][0] <= +data[1] && +data[1] <= answers[1][1])) return false;
 
-  if (!answers[2].some((v) => v === data[2])) return false;
-  if (!answers[3].some((v) => v === data[3])) return false;
-  if (!answers[4].some((v) => v === data[4])) return false;
-  if (!answers[5].some((v) => v === data[5])) return false;
+  const ans: string[] = []
+  for (const i of [2, 3, 4, 5]) {
+    ans[i] = await digestMessage(data[i]);
+  }
+
+  if (!answers[2].some((v) => v === ans[2])) return false;
+  if (!answers[3].some((v) => v === ans[3])) return false;
+  if (!answers[4].some((v) => v === ans[4])) return false;
+  if (!answers[5].some((v) => v === ans[5])) return false;
   return true;
 }
 
